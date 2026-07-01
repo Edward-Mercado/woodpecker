@@ -22,6 +22,7 @@ export const useThemeStore = defineStore('theme', {
                     text4: 'text-white',
                     dynamicText1: ['text-stone-950', 'hover:text-amber-700', 'hover:underline'],
                     dynamicText2: [],
+                    themePath: ['/images/moon.png', 'border-stone-950', 'hover:border-orange-800', 'hover:bg-orange-300/30', 'transition-all', 'ease-in-out', 'duration-300'],
                     activeRoute: ['border-b-3', 'border-solid', 'border-stone-950'],
                     accent1: 'bg-orange-400',
                     button1: 'bg-amber-200',
@@ -41,6 +42,7 @@ export const useThemeStore = defineStore('theme', {
                     dynamicText1: ['text-sky-100', 'hover:text-sky-200', 'hover:underline'],
                     dynamicText2: [],
                     activeRoute: ['border-b-3', 'border-solid', 'border-sky-100'],
+                    themePath: ['/images/sun.png', 'border-sky-100', 'hover:border-sky-200', 'hover:bg-slate-600/80', 'transition-all', 'ease-in-out', 'duration-300'],
                     accent1: 'bg-blue-500',
                     button1: 'bg-sky-400',
                     button2: 'bg-slate-800'
@@ -54,6 +56,12 @@ export const useThemeStore = defineStore('theme', {
             if(!foundTheme) foundTheme = this.themes[0] as themeObject
             this.activeTheme = foundTheme
             return foundTheme
+        },
+        changeTheme() {
+            if(this.activeThemeName === 'light') this.activeThemeName = 'dark'
+            else this.activeThemeName = 'light'
+            localStorage.setItem('themeName', this.activeThemeName)
+            this.getActiveTheme()
         }
     }
 })
