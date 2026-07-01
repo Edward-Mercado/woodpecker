@@ -1,6 +1,13 @@
 export const useThemeStore = defineStore('theme', {
     state: () => ({
         activeThemeName: 'light' as string,
+        currentRoute: '/' as string,
+        landingRoutes: {
+            '/': null,
+            '/typing-speed': null,
+            '/click-speed': null,
+            '/reaction-speed': null,
+        } as landingRouteType,
         activeTheme: null as (null | themeObject),
         themes: [
             {
@@ -15,6 +22,7 @@ export const useThemeStore = defineStore('theme', {
                     text4: 'text-white',
                     dynamicText1: ['text-stone-950', 'hover:text-amber-700', 'hover:underline'],
                     dynamicText2: [],
+                    activeRoute: ['border-b-3', 'border-solid', 'border-stone-950'],
                     accent1: 'bg-orange-400',
                     button1: 'bg-amber-200',
                     button2: 'bg-amber-950'
@@ -32,6 +40,7 @@ export const useThemeStore = defineStore('theme', {
                     text4: 'text-slate-950',
                     dynamicText1: ['text-sky-100', 'hover:text-sky-200', 'hover:underline'],
                     dynamicText2: [],
+                    activeRoute: ['border-b-3', 'border-solid', 'border-sky-100'],
                     accent1: 'bg-blue-500',
                     button1: 'bg-sky-400',
                     button2: 'bg-slate-800'
