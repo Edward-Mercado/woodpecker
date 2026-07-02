@@ -14,13 +14,17 @@
                         @click="currentMode = 'sniper'">
                         Sniper Mode</button>
                 </div>
-                <RsMenu v-if="currentMode !== 'none'" @create-game="(amount) => {console.log(amount, currentMode)}"
+                <RsMenu v-if="currentMode !== 'none'" @create-game="async (amount, size) => {showTest = false; await nextTick(); testSize = size; testAmount = amount; showTest = true}"
                 :mode="currentMode"></RsMenu>
             </div>
         </div>
         <div class="min-h-[2%] w-full" :class="currentTheme.colors.divider">
             <h2 class="text-[0.1rem]" :class="currentTheme.colors.text2">.</h2>
         </div>
+        <ReactionTest v-if="showTest" :mode="currentMode" :testAmount="testAmount" :testSize="testSize"
+        @test-finish="(reactionTimes) => handleTestFinish(reactionTimes)"
+        ></ReactionTest>
+        <ReactionResult :mode="currentMode" :reactionTimes="reactionTimes" v-if="testComplete"></ReactionResult>
     </div>
 </template>
 
@@ -31,6 +35,12 @@ useHead({
 
 let themeStore = useThemeStore()
 let currentTheme = computed(() => themeStore.getActiveTheme())
+let testComplete = ref<boolean>(false)
+let reactionTimes = ref<number[]>([])
+
+let showTest = ref<boolean>(false)
+let testAmount = ref<number>(1)
+let testSize = ref<number>(1)
 
 const currentMode = ref<('none' | 'simple' | 'sniper')>('none')
 
@@ -42,6 +52,14 @@ function getClass(mode: string) {
 
 let simpleClass = computed(() => getClass("simple"))
 let sniperClass = computed(() => getClass("sniper"))
+
+watch(() => currentMode.value, () => { showTest.value = false; testComplete.value = false})
+
+function handleTestFinish(reactionScores:number[]) {
+    reactionTimes.value = reactionScores
+    testComplete.value = true
+    showTest.value = false
+}
 </script>
 
 <style scoped>

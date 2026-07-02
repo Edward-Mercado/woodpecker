@@ -43,13 +43,13 @@ let currentTheme = computed(() => themeStore.getActiveTheme())
 let error = ref<boolean>(false)
 let amountInput = ref<string | null>(null)
 
-let size = ref<number>(0)
+let size = ref<number>(1)
 
 function createTest() {
     let amount = Number(amountInput.value)
     if (!(amount > 0)) {
         error.value = true
-    } else emit('createGame', Math.floor(amount))
+    } else emit('createGame', Math.floor(amount), size.value)
 }
 
 const pluralization = computed(() => { if (amountInput.value === '1' || amountInput.value === '-1') return ''; else return 's' })
