@@ -18,6 +18,7 @@ button1Unactive: string,
 button2: string[],
 divider: string,
 basicDiv: string[],
+clickTesterDiv: string[],
 }
 
 export interface themeObject {

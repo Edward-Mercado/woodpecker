@@ -32,6 +32,7 @@ export const useThemeStore = defineStore('theme', {
                     button1Unactive: 'bg-neutral-950/20',
                     divider: 'bg-stone-900',
                     basicDiv: ['bg-neutral-800/60', 'border-stone-900'],
+                    clickTesterDiv: ['bg-orange-200', 'text-stone-900'],
                 }
             },
             {
@@ -56,6 +57,7 @@ export const useThemeStore = defineStore('theme', {
                     button2: ['bg-slate-800'],
                     divider: 'bg-sky-200',
                     basicDiv: ['bg-sky-200/80', 'border-sky-400'],
+                    clickTesterDiv: ['bg-slate-900', 'text-sky-200', 'hover:bg-slate-800', 'active:bg-sky-800'],
                 }
             }
         ] as themeObject[]

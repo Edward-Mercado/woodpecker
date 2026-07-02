@@ -14,13 +14,14 @@
                         @click="currentMode = 'click'">
                         Click Mode</button>
                 </div>
-                <CsTimedMenu v-if="currentMode === 'timed'"></CsTimedMenu>
-                <CsClickMenu v-else-if="currentMode === 'click'"></CsClickMenu>
+                <CsTimedMenu v-if="currentMode === 'timed'" @create-test="async (time) => {showTest = false; await nextTick(); showTest = true, testQuantity = time}"></CsTimedMenu>
+                <CsClickMenu v-else-if="currentMode === 'click'" @create-test="async (clicks) => {showTest = false; await nextTick(); showTest = true; testQuantity = clicks}"></CsClickMenu>
             </div>
         </div>
         <div class="min-h-[2%] w-full" :class="currentTheme.colors.divider">
             <h2 class="text-[0.1rem]" :class="currentTheme.colors.text2">.</h2>
         </div>
+        <ClickTest v-if="showTest" :testQuantity="testQuantity" :mode="currentMode"></ClickTest>
     </div>
 </template>
 
@@ -31,7 +32,6 @@ useHead({
 
 function getClass(mode: string) {
     if (mode === currentMode.value) {
-        console.log('hi')
         return currentTheme.value.colors.button1Active
     } else return currentTheme.value.colors.button1Unactive
 }
@@ -39,13 +39,15 @@ function getClass(mode: string) {
 let timedModeClass = computed(() => getClass('timed'))
 let clickModeClass = computed(() => getClass('click'))
 
+let testQuantity = ref<number>(0)
+let showTest = ref<boolean>(false)
+
 let themeStore = useThemeStore()
 let currentTheme = computed(() => themeStore.getActiveTheme())
 
 const currentMode = ref<('none' | 'timed' | 'click')>('none')
 
-
-
+watch(() => currentMode.value, () => {showTest.value = false ; testQuantity.value = 0})
 </script>
 
 <style scoped></style>
