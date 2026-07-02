@@ -13,7 +13,7 @@
                 <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2"> Final Click Speed {{
                     (prop.clicks / prop.time).toFixed(1) }} </h2>
             </div>
-            <h2 class="text-4xl elms-sans text-center" :class="currentTheme.colors.text1"> That's as fast as a {{getRank()}}!</h2>
+            <h2 class="text-4xl elms-sans text-center" :class="currentTheme.colors.text1"> That's as fast as a <span :class="currentTheme.colors.text3">{{getRank()}}</span>!</h2>
         </div>
     </div>
 </template>
@@ -39,7 +39,9 @@ function getRank() {
         return "gazelle"
     } else if (cps < 10) {
         return "falcon"
-    } else return "cheetah"
+    } else if (cps < 20) {
+        return 'cheetah'
+    } else return 'woodpecker'
 }
 </script>
 
