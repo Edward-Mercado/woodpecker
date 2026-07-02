@@ -19,6 +19,7 @@ button2: string[],
 divider: string,
 basicDiv: string[],
 clickTesterDiv: string[],
+rangeSlider: string[]
 }
 
 export interface themeObject {

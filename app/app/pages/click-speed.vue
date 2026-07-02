@@ -14,14 +14,22 @@
                         @click="currentMode = 'click'">
                         Click Mode</button>
                 </div>
-                <CsTimedMenu v-if="currentMode === 'timed'" @create-test="async (time) => {showTest = false; await nextTick(); showTest = true, testQuantity = time}"></CsTimedMenu>
-                <CsClickMenu v-else-if="currentMode === 'click'" @create-test="async (clicks) => {showTest = false; await nextTick(); showTest = true; testQuantity = clicks}"></CsClickMenu>
+                <CsTimedMenu v-if="currentMode === 'timed'" @create-test="async (time) => {showTest = false; await nextTick(); showTest = true; testEnded = false; testQuantity = time}"></CsTimedMenu>
+                <CsClickMenu v-else-if="currentMode === 'click'" @create-test="async (clicks) => {showTest = false; await nextTick(); showTest = true; testEnded = false; testQuantity = clicks}"></CsClickMenu>
             </div>
         </div>
         <div class="min-h-[2%] w-full" :class="currentTheme.colors.divider">
             <h2 class="text-[0.1rem]" :class="currentTheme.colors.text2">.</h2>
         </div>
-        <ClickTest v-if="showTest" :testQuantity="testQuantity" :mode="currentMode"></ClickTest>
+        <ClickTest v-if="showTest" :testQuantity="testQuantity" :mode="currentMode"
+        @click-end="(time, clicks, cps) => endTest(clicks, time, cps)"
+        @timed-end="(time, clicks, cps) => endTest(clicks, time, cps)"
+        ></ClickTest>
+        <ClickResult v-if="testEnded"
+        :time="testResultProps.time"
+        :clicks="testResultProps.clicks"
+        :mode="testResultProps.mode"
+        ></ClickResult>
     </div>
 </template>
 
@@ -41,13 +49,33 @@ let clickModeClass = computed(() => getClass('click'))
 
 let testQuantity = ref<number>(0)
 let showTest = ref<boolean>(false)
+let testEnded = ref<boolean>(false)
 
 let themeStore = useThemeStore()
 let currentTheme = computed(() => themeStore.getActiveTheme())
 
 const currentMode = ref<('none' | 'timed' | 'click')>('none')
 
-watch(() => currentMode.value, () => {showTest.value = false ; testQuantity.value = 0})
+watch(() => currentMode.value, () => {showTest.value = false ; testEnded.value = false ; testQuantity.value = 0})
+
+let testResultProps = reactive({
+    time: 0,
+    clicks: 0,
+    cps: 0,
+    mode: "none"
+})
+
+function endTest(time:number, clicks:number, cps:number) {
+    console.log(time, clicks, cps)
+    testResultProps.time = time
+    testResultProps.clicks = clicks
+    testResultProps.cps = cps
+    testResultProps.mode = currentMode.value
+
+    showTest.value = false
+    testEnded.value = true
+}
+
 </script>
 
 <style scoped></style>

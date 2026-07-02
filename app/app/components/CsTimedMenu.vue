@@ -3,7 +3,7 @@
         <div class="flex w-full justify-between">
             <div class="flex items-center">
                 <input type="text" inputmode="numeric" maxlength="5" class="min-w-[15%] w-20 rounded-2xl px-[2%] elms-sans focus:outline-none text-center" :class="[currentTheme.colors.bg2, currentTheme.colors.text2]" placeholder="####" v-model="timeInput"> 
-                <p class="elms-sans ml-3" :class="currentTheme.colors.text4"> seconds</p>
+                <p class="elms-sans ml-3" :class="currentTheme.colors.text4"> second{{ pluralization }}</p>
             </div>
             <button :class="currentTheme.colors.button1" class="border-2 px-[1%] rounded-2xl transition-all duration-300 hover:translate-y-[-5%] active:translate-y-[5%] elms-sans w-[10%]"
             v-for="number in ['1', '5', '10', '20']"
@@ -13,7 +13,7 @@
             @click="createTest()"
             >Create Test</button>
         </div>
-        <div v-if="error" class="mt-[1%] text-md elms-sans italic">
+        <div v-if="error" class="mt-[1%] text-md elms-sans italic" :class="currentTheme.colors.text4">
             # That's not a valid amount of time. Try again please!
         </div>
     </div>
@@ -34,6 +34,8 @@ function createTest() {
 }
 
 watch(() => timeInput.value, () => error.value = false)
+
+const pluralization = computed(() => {if(timeInput.value === '1' || timeInput.value === '-1') return ''; else return 's'})
 </script>
 
 <style scoped>

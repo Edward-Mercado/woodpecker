@@ -1,5 +1,5 @@
 <template>
-    <div data-aos="fade-up" class="mt-[4%] border-2 rounded-2xl p-[2%] justify-around items-center flex flex-col px-auto h-[45vh]"
+    <div data-aos="fade-up" class="mt-[4%] border-2 rounded-2xl p-[2%] justify-around items-center flex flex-col px-auto h-[45vh] w-[96%] mx-[2%]"
         :class="currentTheme.colors.basicDiv">
         <h2 class="elms-sans text-center text-xl" :class="currentTheme.colors.text4"> Click the box below to start.
         </h2>
@@ -74,7 +74,7 @@ function receiveTimedClick() {
             if (timed.remainingTime < 0.1) {
                 ended.value = true
                 timed.remainingTime = 0
-                emit('timedEnd', timed.totalTime, timed.currentClicks, timed.currentCPS)
+                emit('timedEnd', timed.currentClicks, timed.totalTime, timed.currentCPS)
                 
                 clearTimeout(clickInterval)
             }

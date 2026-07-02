@@ -33,6 +33,7 @@ export const useThemeStore = defineStore('theme', {
                     divider: 'bg-stone-900',
                     basicDiv: ['bg-neutral-800/60', 'border-stone-900'],
                     clickTesterDiv: ['bg-orange-200', 'text-stone-900'],
+                    rangeSlider: ['bg-neutral-400', 'border-neutral-900', 'border-2'],
                 }
             },
             {
@@ -58,6 +59,7 @@ export const useThemeStore = defineStore('theme', {
                     divider: 'bg-sky-200',
                     basicDiv: ['bg-sky-200/80', 'border-sky-400'],
                     clickTesterDiv: ['bg-slate-900', 'text-sky-200', 'hover:bg-slate-800', 'active:bg-sky-800'],
+                    rangeSlider: ['bg-slate-900', 'border-slate-700', 'border-2'],
                 }
             }
         ] as themeObject[]
