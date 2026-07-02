@@ -7,6 +7,12 @@
 </template>
 
 <script setup>
+onMounted(async () => {
+  const AOS = (await import('aos')).default
+  await import('aos/dist/aos.css')
+
+  AOS.init()
+})
 
 const route = useRoute()
 
@@ -19,12 +25,21 @@ watch(() => route.fullPath, (newPath) => {
 
 const themeStore = useThemeStore()
 const currentTheme = computed(() => themeStore.getActiveTheme())
-
-useHead({
-  title: 'Woodpecker',
-  bodyAttrs: {
-    class: currentTheme.value.colors.bg2
+  
+onMounted(() => {
+  if(localStorage.getItem('themeName')) {
+    themeStore.activeThemeName = localStorage.getItem("themeName")
+    themeStore.getActiveTheme()
   }
 })
 
+useHead(() => ({
+  title: 'Woodpecker',
+  bodyAttrs: {
+    class: currentTheme.value.colors.bg2,
+  },
+  htmlAttrs: {
+    class: currentTheme.value.colors.bg2,
+  },
+}))
 </script>

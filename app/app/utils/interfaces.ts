@@ -6,13 +6,18 @@ text1: string
 text2: string,
 text3: string,
 text4: string,
+text5: string,
 dynamicText1: string[],
 dynamicText2: string[],
 activeRoute: string[],
 themePath: string[],
 accent1: string,
-button1: string,
-button2: string,
+button1: string[],
+button1Active: string,
+button1Unactive: string,
+button2: string[],
+divider: string,
+basicDiv: string[],
 }
 
 export interface themeObject {
