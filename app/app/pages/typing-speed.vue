@@ -7,7 +7,9 @@
         <div class="min-h-[2%] w-full" :class="currentTheme.colors.divider">
             <h2 class="text-[0.1rem]" :class="currentTheme.colors.text2">.</h2>
         </div>
-        
+        <div class="elms-sans px-[2%] py-[4%]" :class="currentTheme.colors.text2">
+            As of July 3, 2026, the <span class="italic">Typing Speed Test</span> is not implemented.
+        </div>
     </div>
 </template>
 
