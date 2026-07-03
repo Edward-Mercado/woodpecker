@@ -17,11 +17,11 @@
     </div>
     <div class="w-[90%] mx-[5%] h-[50%] border-2 transition-all ease-in-out duration-200 rounded-2xl p-[1%] flex flex-col justify-around items-center elms-sans text-xl"
         :class="[currentTheme.colors.bg2, currentTheme.colors.text2]" v-if="clickedValid">
-        Your score: {{ reactionScore }}ms
+        Your score: {{ reactionScore }} ms
         <button class="w-[90%] mx-[5%] border-2 rounded-full transition-all duration-300 ease-in-out
         hover:translate-y-[-5%] active:translate-y-[5%] py-[1%] elms-sans text-2x"
             :class="[currentTheme.colors.bg4, currentTheme.colors.button1]"
-            @click="{clickedValid = false; $emit('testFinish', reactionScore)}">GO TO NEXT TEST / FINISH</button>
+            @click="{earlyCall = clickedValid; clickedValid = false; $emit('testFinish', reactionScore, earlyCall)}">GO TO NEXT TEST / FINISH</button>
     </div>
 </template>
 
@@ -31,6 +31,7 @@ let currentTheme = computed(() => themeStore.getActiveTheme())
 let targetReady = ref<boolean>(false)
 let clickedInvalid = ref<boolean>(false)
 let clickedValid = ref<boolean>(false)
+let earlyCall = ref<boolean>(false)
 
 const startTimestamp = ref<number>(0)
 const endTimestamp = ref<number>(0)

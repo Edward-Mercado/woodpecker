@@ -11,7 +11,7 @@
                 <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2"> Amount of Clicks: {{
                     prop.clicks }} </h2>
                 <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2"> Final Click Speed {{
-                    (prop.clicks / prop.time).toFixed(1) }} </h2>
+                    (prop.clicks / prop.time).toFixed(1) }} cps </h2>
             </div>
             <h2 class="text-4xl elms-sans text-center" :class="currentTheme.colors.text1"> That's as fast as a <span :class="currentTheme.colors.text3">{{getRank()}}</span>!</h2>
         </div>

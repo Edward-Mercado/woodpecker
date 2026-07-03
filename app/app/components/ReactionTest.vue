@@ -5,7 +5,7 @@
         </h2>
         <button :class="currentTheme.colors.button1" class="w-full border-2 rounded-2xl transition-all ease-in-out duration-300 hover:translate-y-[-5%] active:translate-y-[5%] elms-sans py-[5%] text-4xl" v-if="!testBegun" @click="createNextTest()">Begin Test</button>
         <SimpleTarget v-if="targetVisible && mode==='simple'"
-        @test-finish="(reactionScore) => handleCompletion(reactionScore)"></SimpleTarget>
+        @test-finish="(reactionScore, earlyCall) => handleCompletion(reactionScore, earlyCall)"></SimpleTarget>
         <SniperTarget v-if="targetVisible && mode==='sniper'" :size="testSize / 100" :speed="testSpeed / 100"
         :testNum="testAmount"
         @testEnd="(reactionScores) => $emit('testFinish', reactionScores)"
@@ -28,6 +28,7 @@ const emit = defineEmits(['testFinish'])
 
 const testBegun = ref<boolean>(false)
 const targetVisible = ref<boolean>(false)
+const earlyCalls = ref<number>(0)
 
 let reactionTimes = ref<number[]>([])
 
@@ -41,13 +42,15 @@ async function createNextTest() {
     testsRemaining.value--
 }
 
-async function handleCompletion(reactionScore:number) {
+async function handleCompletion(reactionScore:number, earlyCall: boolean) {
     reactionTimes.value.push(reactionScore)
-    console.log(testsRemaining.value)
+
+    if(earlyCall) earlyCalls.value++
+
     if(testsRemaining.value > 0) createNextTest()
     else {
         targetVisible.value = false
-        emit('testFinish', reactionTimes.value)
+        emit('testFinish', reactionTimes.value, earlyCalls.value)
     }
 }
 

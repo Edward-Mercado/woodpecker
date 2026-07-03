@@ -1,6 +1,9 @@
 <template>
     <div class="mt-[2%] p-[1%] rounded-2xl px-[2%] border-2" :class="currentTheme.colors.basicDiv">
-        <p :class="currentTheme.colors.text4" class="elms-sans text-xl mr-[1%] mt-[1%]">Test Configuration:</p>
+        <div class="w-full justify-between flex-row flex">   
+            <p :class="currentTheme.colors.text4" class="elms-sans text-xl mr-[1%] mt-[1%] w-[50%]">Test Configuration:</p>
+            <button class="border-2 elms-sans px-[1%] rounded-2xl transition-all duration-300 ease-in-out hover:-translate-y-[5%] active:translate-y-[5%]" :class="currentTheme.colors.button1" @click="useRecSettings()"> Use Recommended Settings </button>
+        </div>
         <div class="my-[2%] border rounded-full" :class="currentTheme.colors.basicDiv"></div>
         
         <div class="flex w-full justify-between mb-[1%] flex-wrap gap-y-2">
@@ -30,26 +33,20 @@ const emit = defineEmits(['createGame'])
 
 let themeStore = useThemeStore()
 let currentTheme = computed(() => themeStore.getActiveTheme())
-let wordsError = ref<boolean>(false)
-let wordsInput = ref<string | null>(null)
-let selectedLanguage = ref<string | null>('English')
 let allLowercase = ref<boolean>(false)
 let usePunctuation = ref<boolean>(false)
 let showAuthor = ref<boolean>(false)
 
 function createTest() {
-    let words = Number(wordsInput.value)
-    if (!(words > 0)) wordsError.value = true
-    
-    if((!wordsError.value)
-    && (selectedLanguage.value)
-    ) {} // EMIT
+    {} // EMIT
     
 }
 
-const wordsPluralization = computed(() => { if (wordsInput.value === '1' || wordsInput.value === '-1') return ''; else return 's' })
-
-watch(() => wordsInput.value, () => wordsError.value = false)
+function useRecSettings() {
+    showAuthor.value = true
+    usePunctuation.value = true
+    allLowercase.value = false
+}
 </script>
 
 <style scoped></style>

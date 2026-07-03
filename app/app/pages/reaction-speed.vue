@@ -22,9 +22,9 @@
             <h2 class="text-[0.1rem]" :class="currentTheme.colors.text2">.</h2>
         </div>
         <ReactionTest v-if="showTest" :mode="currentMode" :testAmount="testAmount" :testSize="testSize" :testSpeed="testSpeed"
-        @test-finish="(reactionTimes) => handleTestFinish(reactionTimes)"
+        @test-finish="(reactionTimes, earlyCalls) => handleTestFinish(reactionTimes, earlyCalls)"
         ></ReactionTest>
-        <ReactionResult :mode="currentMode" :reactionTimes="reactionTimes" v-if="testComplete"></ReactionResult>
+        <ReactionResult :earlyCalls="totalEarlyCalls" :mode="currentMode" :reactionTimes="reactionTimes" v-if="testComplete"></ReactionResult>
     </div>
 </template>
 
@@ -37,6 +37,7 @@ let themeStore = useThemeStore()
 let currentTheme = computed(() => themeStore.getActiveTheme())
 let testComplete = ref<boolean>(false)
 let reactionTimes = ref<number[]>([])
+let totalEarlyCalls = ref<number>(0)
 
 let showTest = ref<boolean>(false)
 let testAmount = ref<number>(1)
@@ -56,8 +57,10 @@ let sniperClass = computed(() => getClass("sniper"))
 
 watch(() => currentMode.value, () => { showTest.value = false; testComplete.value = false})
 
-function handleTestFinish(reactionScores:number[]) {
+function handleTestFinish(reactionScores:number[], earlyCalls:number) {
     reactionTimes.value = reactionScores
+    totalEarlyCalls.value = earlyCalls
+
     testComplete.value = true
     showTest.value = false
 }

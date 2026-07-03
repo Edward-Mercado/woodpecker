@@ -7,8 +7,8 @@
             :class="currentTheme.colors.bg2">
             <div>
                 <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2"> Your Scores: {{ scoresString }} </h2>
-                <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2" v-if="prop.mode==='simple'"> Early Calls: {{ earlyCallCount }} </h2>
-                <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2"> Final Reaction Time Average: {{ average }}ms  </h2>
+                <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2" v-if="prop.mode==='simple'"> Early Calls: {{ earlyCalls }} </h2>
+                <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2"> Final Reaction Time Average: {{ average }} ms  </h2>
                 <h2 class="text-4xl elms-sans text-center mt-[2%]" :class="currentTheme.colors.text1"> That's as fast as a <span :class="currentTheme.colors.text3">{{getRank()}}</span>!</h2>
             </div>
         </div>
@@ -19,13 +19,13 @@
 const prop = defineProps<{
     mode:string,
     reactionTimes:number[]
+    earlyCalls: number
 }>()
 
 let scoresString = ref<string>('')
 
 let themeStore = useThemeStore()
 let currentTheme = computed(() => themeStore.getActiveTheme())
-let earlyCallCount = ref<number>(0)
 let total = ref<number>(0)
 let average = ref<number>(0)
 
@@ -35,9 +35,9 @@ const modeAdjuster = computed(() => { if(prop.mode ==='sniper') return -300; els
 prop.reactionTimes.forEach((time:number, index) => {
     scoresString.value += time
     total.value += time
-    if(time === 2000) earlyCallCount.value++
+
     if(index + 1 === prop.reactionTimes.length) scoresString.value += 'ms'
-    else scoresString.value += 'ms, '
+    else scoresString.value += ' ms, '
 })
 average.value = Number((total.value / prop.reactionTimes.length).toFixed(0))
 

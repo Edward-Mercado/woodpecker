@@ -1,6 +1,9 @@
 <template>
     <div class="mt-[2%] p-[1%] rounded-2xl px-[2%] border-2" :class="currentTheme.colors.basicDiv">
-        <p :class="currentTheme.colors.text4" class="elms-sans text-xl mr-[1%] mt-[1%]">Test Configuration:</p>
+        <div class="w-full justify-between flex-row flex">   
+            <p :class="currentTheme.colors.text4" class="elms-sans text-xl mr-[1%] mt-[1%] w-[50%]">Test Configuration:</p>
+            <button class="border-2 elms-sans px-[1%] rounded-2xl transition-all duration-300 ease-in-out hover:-translate-y-[5%] active:translate-y-[5%]" :class="currentTheme.colors.button1" @click="useRecSettings()"> Use Recommended Settings </button>
+        </div>
         <div class="my-[2%] border rounded-full" :class="currentTheme.colors.basicDiv"></div>
         <div class="flex w-full justify-between">
             <div class="flex items-center">
@@ -8,7 +11,7 @@
                 <p class="elms-sans ml-3" :class="currentTheme.colors.text4"> click{{ pluralization }}</p>
             </div>
             <button :class="currentTheme.colors.button1" class="border-2 px-[1%] rounded-2xl transition-all duration-300 hover:translate-y-[-5%] active:translate-y-[5%] elms-sans w-[10%]"
-            v-for="number in ['10', '50', '100', '200']"
+            v-for="number in ['10', '25', '50', '100']"
             @click="clicksInput = number"
             >{{ number }}</button>
             <button :class="currentTheme.colors.button1" class="border-2 px-[1%] rounded-2xl transition-all duration-300 hover:translate-y-[-5%] active:translate-y-[5%] elms-sans"
@@ -38,6 +41,10 @@ function createTest() {
 const pluralization = computed(() => {if(clicksInput.value === '1' || clicksInput.value === '-1') return ''; else return 's'})
 
 watch(() => clicksInput.value, () => error.value = false)
+
+function useRecSettings() {
+    clicksInput.value = '25'
+}
 </script>
 
 <style scoped>

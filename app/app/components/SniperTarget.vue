@@ -11,7 +11,7 @@
             :class="currentTheme.colors.bg2">
             <h2 class="elms-sans text-2xl" :class="currentTheme.colors.text1"> YOUR SCORES </h2>
             <h2 class="elms-sans text-lg" :class="currentTheme.colors.text3" v-for="score in targetScores"> {{ score
-                }}ms </h2>
+                }} ms </h2>
         </div>
     </div>
 </template>
@@ -35,8 +35,8 @@ const targetScores = ref<number[]>([])
 
 const sizeClass = computed(() => `scale-[${Number(prop.size.toFixed(2))}]`)
 
-const placeX = ref<string>(`left-[${Math.floor(Math.random() * 80)+5}%]`)
-const placeY = ref<string>(`top-[${Math.floor(Math.random() * 80)+5}%]`)
+const placeX = ref<string>(`left-[${Math.floor(Math.random() * 70)+5}%]`)
+const placeY = ref<string>(`top-[${Math.floor(Math.random() * 70)+5}%]`)
 
 const startTime = ref<number>(0)
 const endTime = ref<number>(0)
