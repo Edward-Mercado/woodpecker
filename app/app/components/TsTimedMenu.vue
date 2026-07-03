@@ -94,6 +94,8 @@ function createTest() {
 
     if((seconds === 0) && !minutesError.value) secondsError.value = false
 
+    if(Number.isNaN(seconds) || Number.isNaN(minutes)) {secondsError.value = true; minutesError.value = true}
+
     if((!secondsError.value) && (!minutesError.value)
     && (selectedLanguage.value)
     ) {} // EMIT
