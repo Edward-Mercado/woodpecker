@@ -7,7 +7,7 @@
             :class="currentTheme.colors.bg2">
             <div>
                 <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2"> Your Scores: {{ scoresString }} </h2>
-                <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2"> Early Calls: {{ earlyCallCount }} </h2>
+                <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2" v-if="prop.mode==='simple'"> Early Calls: {{ earlyCallCount }} </h2>
                 <h2 class="text-xl text-center elms-sans" :class="currentTheme.colors.text2"> Final Reaction Time Average: {{ average }}ms  </h2>
                 <h2 class="text-4xl elms-sans text-center mt-[2%]" :class="currentTheme.colors.text1"> That's as fast as a <span :class="currentTheme.colors.text3">{{getRank()}}</span>!</h2>
             </div>
@@ -29,6 +29,8 @@ let earlyCallCount = ref<number>(0)
 let total = ref<number>(0)
 let average = ref<number>(0)
 
+const modeAdjuster = computed(() => { if(prop.mode ==='sniper') return -300; else return 0})
+
 // create scoresString
 prop.reactionTimes.forEach((time:number, index) => {
     scoresString.value += time
@@ -40,11 +42,11 @@ prop.reactionTimes.forEach((time:number, index) => {
 average.value = Number((total.value / prop.reactionTimes.length).toFixed(0))
 
 function getRank() {
-    if(average.value > 1000) return 'sloth'
-    else if (average.value > 500) return 'goldfish'
-    else if (average.value > 350) return 'lion'
-    else if (average.value > 250) return 'cheetah'
-    else if (average.value > 150) return 'cat'
+    if(average.value + modeAdjuster.value > 1000) return 'sloth'
+    else if (average.value + modeAdjuster.value > 500) return 'goldfish'
+    else if (average.value + modeAdjuster.value > 350) return 'lion'
+    else if (average.value + modeAdjuster.value > 250) return 'cheetah'
+    else if (average.value + modeAdjuster.value > 150) return 'cat'
     else return 'woodpecker'
 }
 

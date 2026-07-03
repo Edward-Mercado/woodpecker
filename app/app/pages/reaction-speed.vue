@@ -14,7 +14,7 @@
                         @click="currentMode = 'sniper'">
                         Sniper Mode</button>
                 </div>
-                <RsMenu v-if="currentMode !== 'none'" @create-game="async (amount, size, speed) => {showTest = false; await nextTick(); testSize = size; testAmount = amount; testSpeed = speed; showTest = true}"
+                <RsMenu v-if="currentMode !== 'none'" @create-game="async (amount, size, speed) => {showTest = false; testComplete = false; await nextTick(); testSize = size; testAmount = amount; testSpeed = speed; showTest = true}"
                 :mode="currentMode"></RsMenu>
             </div>
         </div>
