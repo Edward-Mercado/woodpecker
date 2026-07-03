@@ -1,4 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+NZ:wght@100..400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @plugin "daisyui";
+
+.elms-sans {
+  font-family: "Elms Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+}
+
+.playwrite-nz {
+  font-family: "Playwrite NZ";
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+
+@layer utilities {
+  /* Chrome, Safari, and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Firefox, IE, and Edge */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
