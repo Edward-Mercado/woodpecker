@@ -20,7 +20,8 @@ button2: string[],
 divider: string,
 basicDiv: string[],
 clickTesterDiv: string[],
-rangeSlider: string[]
+rangeSlider: string[],
+selection: string,
 }
 
 export interface themeObject {

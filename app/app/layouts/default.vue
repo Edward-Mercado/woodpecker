@@ -11,7 +11,7 @@
                 <router-link to="/typing-speed" class="text-center md:text-2xl text-lg elms-sans font-black transition-all ease-in-out duration-100" :class="[currentTheme.colors.dynamicText1, themeStore.landingRoutes['/typing-speed']]" data-name="typing-speed">typing speed</router-link>
                 <router-link to="/click-speed" class="text-center md:text-2xl text-lg elms-sans font-black transition-all ease-in-out duration-100" :class="[currentTheme.colors.dynamicText1, themeStore.landingRoutes['/click-speed']]" data-name="click-speed">click speed</router-link>
                 <router-link to="/reaction-speed" class="md:text-2xl text-lg text-center elms-sans font-black transition-all ease-in-out duration-100" :class="[currentTheme.colors.dynamicText1, themeStore.landingRoutes['/reaction-speed']]" data-name="reaction-speed">reaction speed</router-link>
-                <img class="p-[0.3%] md:h-[80%] h-[50%] aspect-square border-4 md:rounded-3xl rounded-xl border-black" :class="currentTheme.colors.themePath.slice(1, currentTheme.colors.themePath.length)" :src="currentTheme.colors.themePath[0]" @click="themeStore.changeTheme()"></img>
+                <img class="p-[0.3%] md:h-[80%] h-[50%] aspect-square border-4 md:rounded-3xl rounded-xl border-black hover:rotate-[5deg] active:rotate-[15deg]" :class="currentTheme.colors.themePath.slice(1, currentTheme.colors.themePath.length)" :src="currentTheme.colors.themePath[0]" @click="themeStore.changeTheme()"></img>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen overscroll-none" :class="currentTheme.colors.bg2">
+  <div class="h-screen overscroll-none" :class="[currentTheme.colors.bg2, currentTheme.colors.selection]">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

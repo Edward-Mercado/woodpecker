@@ -21,12 +21,12 @@
             # That's not a valid amount of tests. Try again please!
         </div>
         <div v-if="mode === 'sniper'" class="mt-[1%]">
-            <p :class="currentTheme.colors.text4" class="elms-sans text-lg mr-[1%]">Snipe Target Size: </p>
+            <p :class="currentTheme.colors.text4" class="elms-sans text-lg mr-[1%]">Snipe Target Size: (Selected Size: {{ size }}%) </p>
             <div class="flex flex-row items-center justify-between h-[20%]">
                 <p :class="currentTheme.colors.text4" class="elms-sans text-lg mr-[1%]">Smallest </p>
                 <input type="range" 
                 class="w-[70%] h-full cursor-pointer appearance-none rounded-full" :class="currentTheme.colors.rangeSlider" v-model="size"
-                min="1" max="5" step="1">
+                min="50" max="150" step="1">
                 <p :class="currentTheme.colors.text4" class="elms-sans text-lg mr-[1%]">Largest </p>
             </div>
         </div>
@@ -43,7 +43,7 @@ let currentTheme = computed(() => themeStore.getActiveTheme())
 let error = ref<boolean>(false)
 let amountInput = ref<string | null>(null)
 
-let size = ref<number>(1)
+let size = ref<number>(100)
 
 function createTest() {
     let amount = Number(amountInput.value)
