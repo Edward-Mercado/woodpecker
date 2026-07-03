@@ -22,6 +22,7 @@ basicDiv: string[],
 clickTesterDiv: string[],
 rangeSlider: string[],
 selection: string,
+sniperTarget: string[],
 }
 
 export interface themeObject {

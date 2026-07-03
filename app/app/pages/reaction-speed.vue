@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen">
+    <div class="min-h-screen pb-[5%]">
         <div class="px-[2%] py-[4%]" :class="[currentTheme.colors.bg1]">
             <h2 class="text-4xl elms-sans" :class="currentTheme.colors.text1"> Reaction Speed Test </h2>
             <p class="elms-sans text-lg mt-[2%] italic" :class="currentTheme.colors.text3"> How fast can you react? </p>
@@ -14,14 +14,14 @@
                         @click="currentMode = 'sniper'">
                         Sniper Mode</button>
                 </div>
-                <RsMenu v-if="currentMode !== 'none'" @create-game="async (amount, size) => {showTest = false; await nextTick(); testSize = size; testAmount = amount; showTest = true}"
+                <RsMenu v-if="currentMode !== 'none'" @create-game="async (amount, size, speed) => {showTest = false; await nextTick(); testSize = size; testAmount = amount; testSpeed = speed; showTest = true}"
                 :mode="currentMode"></RsMenu>
             </div>
         </div>
         <div class="min-h-[2%] w-full" :class="currentTheme.colors.divider">
             <h2 class="text-[0.1rem]" :class="currentTheme.colors.text2">.</h2>
         </div>
-        <ReactionTest v-if="showTest" :mode="currentMode" :testAmount="testAmount" :testSize="testSize"
+        <ReactionTest v-if="showTest" :mode="currentMode" :testAmount="testAmount" :testSize="testSize" :testSpeed="testSpeed"
         @test-finish="(reactionTimes) => handleTestFinish(reactionTimes)"
         ></ReactionTest>
         <ReactionResult :mode="currentMode" :reactionTimes="reactionTimes" v-if="testComplete"></ReactionResult>
@@ -41,6 +41,7 @@ let reactionTimes = ref<number[]>([])
 let showTest = ref<boolean>(false)
 let testAmount = ref<number>(1)
 let testSize = ref<number>(1)
+let testSpeed = ref<number>(1)
 
 const currentMode = ref<('none' | 'simple' | 'sniper')>('none')
 

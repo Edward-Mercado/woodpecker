@@ -2,7 +2,7 @@
     <div class="mt-[2%] p-[1%] rounded-2xl px-[2%] border-2" :class="currentTheme.colors.basicDiv">
         <div class="flex w-full justify-between">
             <div class="flex items-center">
-                <input type="text" inputmode="numeric" maxlength="5" class="min-w-[15%] w-20 rounded-2xl px-[2%] elms-sans focus:outline-none text-center" :class="[currentTheme.colors.bg2, currentTheme.colors.text2]" placeholder="####" v-model="clicksInput"> 
+                <input type="text" inputmode="numeric" maxlength="5" class="min-w-[15%] w-20 rounded-2xl px-[2%] elms-sans focus:outline-none text-center" :class="[currentTheme.colors.bg2, currentTheme.colors.text2]" placeholder="###" v-model="clicksInput"> 
                 <p class="elms-sans ml-3" :class="currentTheme.colors.text4"> click{{ pluralization }}</p>
             </div>
             <button :class="currentTheme.colors.button1" class="border-2 px-[1%] rounded-2xl transition-all duration-300 hover:translate-y-[-5%] active:translate-y-[5%] elms-sans w-[10%]"
