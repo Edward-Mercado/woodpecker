@@ -1,5 +1,7 @@
 <template>
     <div class="mt-[2%] p-[1%] rounded-2xl px-[2%] border-2" :class="currentTheme.colors.basicDiv">
+        <p :class="currentTheme.colors.text4" class="elms-sans text-xl mr-[1%] mt-[1%]">Test Configuration:</p>
+        <div class="my-[2%] border rounded-full" :class="currentTheme.colors.basicDiv"></div>
         <div class="flex w-full justify-between">
             <div class="flex items-center">
                 <input type="text" inputmode="numeric" maxlength="5" class="min-w-[15%] w-20 rounded-2xl px-[2%] elms-sans focus:outline-none text-center" :class="[currentTheme.colors.bg2, currentTheme.colors.text2]" placeholder="###" v-model="timeInput"> 

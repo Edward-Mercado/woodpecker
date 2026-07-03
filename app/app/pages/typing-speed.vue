@@ -3,13 +3,30 @@
         <div class="px-[2%] py-[4%]" :class="[currentTheme.colors.bg1]">
             <h2 class="text-4xl elms-sans" :class="currentTheme.colors.text1"> Typing Speed Test </h2>
             <p class="elms-sans text-lg mt-[2%] italic" :class="currentTheme.colors.text3"> How fast can you type? </p>
+            <div :class="currentTheme.colors.basicDiv" class="rounded-2xl border-2 p-[1%] mt-[2%]">
+                <div class="w-full flex justify-between">
+                    <button :class="[currentTheme.colors.button1, timedModeClass]"
+                        class="border-2 rounded-2xl p-[1%] w-[30%] elms-sans text-xl transition-all duration-300 ease-in-out hover:translate-y-[-5%] active:translate-y-[5%]"
+                        @click="currentMode = 'timed'">
+                        Timed Mode</button>
+                    <button :class="[currentTheme.colors.button1, wordsModeClass]"
+                        class="border-2 rounded-2xl p-[1%] w-[30%] elms-sans text-xl transition-all duration-300 ease-in-out hover:translate-y-[-5%] active:translate-y-[5%]"
+                        @click="currentMode = 'words'">
+                        Words Mode</button>
+                    <button :class="[currentTheme.colors.button1, quoteModeClass]"
+                        class="border-2 rounded-2xl p-[1%] w-[30%] elms-sans text-xl transition-all duration-300 ease-in-out hover:translate-y-[-5%] active:translate-y-[5%]"
+                        @click="currentMode = 'quote'">
+                        Quote Mode</button>
+                </div>
+                <TsTimedMenu v-if="currentMode === 'timed'"></TsTimedMenu>
+                <TsWordsMenu v-if="currentMode === 'words'"></TsWordsMenu>
+                <TsQuoteMenu v-if="currentMode ==='quote'"></TsQuoteMenu>
+            </div>
         </div>
         <div class="min-h-[2%] w-full" :class="currentTheme.colors.divider">
             <h2 class="text-[0.1rem]" :class="currentTheme.colors.text2">.</h2>
         </div>
-        <div class="elms-sans px-[2%] py-[4%]" :class="currentTheme.colors.text2">
-            As of July 3, 2026, the <span class="italic">Typing Speed Test</span> is not implemented.
-        </div>
+       
     </div>
 </template>
 
@@ -20,6 +37,18 @@ useHead({
 
 let themeStore = useThemeStore()
 let currentTheme = computed(() => themeStore.getActiveTheme())
+
+const currentMode = ref<('words' | 'timed' | 'quote' | 'none')>('none')
+
+function getClass(mode: string) {
+    if (mode === currentMode.value) {
+        return currentTheme.value.colors.button1Active
+    } else return currentTheme.value.colors.button1Unactive
+}
+
+const timedModeClass = computed(() => getClass('timed'))
+const wordsModeClass = computed(() => getClass('words'))
+const quoteModeClass = computed(() => getClass('quote'))
 </script>
 
 <style scoped>

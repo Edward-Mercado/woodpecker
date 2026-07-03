@@ -1,5 +1,7 @@
 <template>
     <div class="mt-[2%] p-[1%] rounded-2xl px-[2%] border-2" :class="currentTheme.colors.basicDiv">
+        <p :class="currentTheme.colors.text4" class="elms-sans text-xl mr-[1%] mt-[1%]">Test Configuration:</p>
+        <div class="my-[2%] border rounded-full" :class="currentTheme.colors.basicDiv"></div>
         <div v-if="mode === 'sniper'">
             <div class="flex justify-between w-full my-[1%]">
                 <div class="w-[40%]">

@@ -38,7 +38,7 @@
                     <h3 class="elms-sans text-xl" :class="currentTheme.colors.text4"> Reaction Speed Test </h3>
                     <p class="elms-sans text-lg mt-[2%]" :class="currentTheme.colors.text5"> How fast can you react? There's... also two variants of this...  </p>
                     <p class="elms-sans text-lg mt-[2%]" :class="currentTheme.colors.text5"> The first is simple mode. As soon as the light turns green, click! </p>
-                    <p class="elms-sans text-lg mt-[2%]" :class="currentTheme.colors.text5"> The second is sniper mode. Not the entire light will turn green, just a small square. Click it fast! </p>
+                    <p class="elms-sans text-lg mt-[2%]" :class="currentTheme.colors.text5"> The second is sniper mode. Not the entire light will turn green, just a small target. Click it fast! </p>
                 </div>
             </div>
         </div>
