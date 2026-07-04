@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen">
+    <div class="min-h-screen pb-[5%]">
         <div class="px-[2%] py-[4%]" :class="[currentTheme.colors.bg1]">
             <h2 class="text-4xl elms-sans" :class="currentTheme.colors.text1"> Click Speed Test </h2>
             <p class="elms-sans text-lg mt-[2%] italic" :class="currentTheme.colors.text3"> How fast can you click? </p>

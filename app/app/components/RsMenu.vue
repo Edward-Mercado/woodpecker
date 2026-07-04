@@ -10,7 +10,7 @@
                 <div class="w-[40%]">
                     <p :class="currentTheme.colors.text4" class="elms-sans text-lg mr-[1%]">Target Size: (Selected Size: {{ size }}%) </p>
                 </div>
-                <button class="rounded-full border-2 elms-sans px-[1%]" :class="currentTheme.colors.button1" v-for="i in [50, 75, 100, 125, 150]"
+                <button class="rounded-full border-2 elms-sans px-[1%] transition-all duration-300 ease-in-out hover:-translate-y-[5%] active:translate-y-[5%]" :class="currentTheme.colors.button1" v-for="i in [50, 75, 100, 125, 150]"
                 @click="size=i">{{ i }}%</button>
             </div>
             <div class="flex flex-row items-center justify-between h-[20%]">
@@ -30,7 +30,7 @@
                 <div class="w-[40%]">
                     <p :class="currentTheme.colors.text4" class="elms-sans text-lg mr-[1%]">Target Speed: (Selected Speed: {{ speed }}%) </p>
                 </div>
-                <button class="rounded-full border-2 elms-sans px-[1%]" :class="currentTheme.colors.button1" v-for="i in [50, 75, 100, 125, 150]"
+                <button class="rounded-full border-2 elms-sans px-[1%] transition-all duration-300 ease-in-out hover:-translate-y-[5%] active:translate-y-[5%]" :class="currentTheme.colors.button1" v-for="i in [50, 75, 100, 125, 150]"
                 @click="speed=i">{{ i }}%</button>
             </div>
             <div class="flex flex-row items-center justify-between h-[20%]">

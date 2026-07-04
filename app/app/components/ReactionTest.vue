@@ -28,7 +28,7 @@ const emit = defineEmits(['testFinish'])
 
 const testBegun = ref<boolean>(false)
 const targetVisible = ref<boolean>(false)
-const earlyCalls = ref<number>(0)
+const earlyCalls = ref<number[]>([])
 
 let reactionTimes = ref<number[]>([])
 
@@ -45,7 +45,8 @@ async function createNextTest() {
 async function handleCompletion(reactionScore:number, earlyCall: boolean) {
     reactionTimes.value.push(reactionScore)
 
-    if(earlyCall) earlyCalls.value++
+    if(!earlyCall) earlyCalls.value.push(1)
+    else earlyCalls.value.push(0)
 
     if(testsRemaining.value > 0) createNextTest()
     else {
