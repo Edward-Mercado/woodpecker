@@ -8,7 +8,7 @@
         @test-finish="(reactionScore, earlyCall) => handleCompletion(reactionScore, earlyCall)"></SimpleTarget>
         <SniperTarget v-if="targetVisible && mode==='sniper'" :size="testSize / 100" :speed="testSpeed / 100"
         :testNum="testAmount"
-        @testEnd="(reactionScores) => $emit('testFinish', reactionScores)"
+        @testEnd="(reactionScores, earlyCalls) => $emit('testFinish', reactionScores, earlyCalls)"
         ></SniperTarget>
     </div>
 </template>

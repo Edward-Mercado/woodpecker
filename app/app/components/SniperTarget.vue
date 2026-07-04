@@ -35,11 +35,13 @@ const targetScores = ref<number[]>([])
 
 const sizeClass = computed(() => `scale-[${Number(prop.size.toFixed(2))}]`)
 
-const placeX = ref<string>(`left-[${Math.floor(Math.random() * 70)+5}%]`)
-const placeY = ref<string>(`top-[${Math.floor(Math.random() * 70)+5}%]`)
+const placeX = ref<string>(`left-[${Math.min(Math.floor(Math.random() * 80)+5,90)}%]`)
+const placeY = ref<string>(`top-[${Math.min(Math.floor(Math.random() * 80)+5,90)}%]`)
 
 const startTime = ref<number>(0)
 const endTime = ref<number>(0)
+
+const earlyCalls = ref<number[]>([])
 
 let spawnTimeout = setTimeout(() => {
         startTime.value = Date.now()
@@ -59,8 +61,9 @@ function handleClick() {
     targetReady.value = false
     placeX.value = `left-[${Math.floor(Math.random() * 100)}%]`
     placeY.value = `top-[${Math.floor(Math.random() * 100)}%]`
+    earlyCalls.value.push(0)
     clearTimeout(spawnTimeout)
-    if(testNumber.value === totalTests.value) emit('testEnd', targetScores.value)
+    if(testNumber.value === totalTests.value) emit('testEnd', targetScores.value, earlyCalls.value)
     else testNumber.value++
 }
 
