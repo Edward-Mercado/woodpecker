@@ -70,8 +70,6 @@
 </template>
 
 <script setup lang="ts">
-import { L } from 'vue-router/dist/index-BQLwgiyK.js'
-
 const emit = defineEmits(['createGame'])
 
 let themeStore = useThemeStore()
@@ -84,6 +82,8 @@ let selectedLanguage = ref<string | null>('English')
 let useNumbers = ref<boolean>(false)
 let usePunctuation = ref<boolean>(false)
 let capitalizeWords = ref<boolean>(false)
+
+useTypeTestStore().resetState()
 
 function createTest() {
     let seconds = Number(secondsInput.value)
@@ -98,7 +98,7 @@ function createTest() {
 
     if((!secondsError.value) && (!minutesError.value)
     && (selectedLanguage.value)
-    ) {} // EMIT
+    ) emit('createGame', 'timed', [minutesInput.value, secondsInput.value, selectedLanguage.value, useNumbers.value, usePunctuation.value, capitalizeWords.value])
     
 }
 

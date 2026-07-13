@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen">
+    <div class="min-h-screen pb-[5%]">
         <div class="px-[2%] py-[4%]" :class="[currentTheme.colors.bg1]">
             <h2 class="text-4xl elms-sans" :class="currentTheme.colors.text1"> Typing Speed Test </h2>
             <p class="elms-sans text-lg mt-[2%] italic" :class="currentTheme.colors.text3"> How fast can you type? </p>
@@ -18,15 +18,21 @@
                         @click="currentMode = 'quote'">
                         Quote Mode</button>
                 </div>
-                <TsTimedMenu v-if="currentMode === 'timed'"></TsTimedMenu>
-                <TsWordsMenu v-if="currentMode === 'words'"></TsWordsMenu>
-                <TsQuoteMenu v-if="currentMode ==='quote'"></TsQuoteMenu>
+                <TsTimedMenu v-if="currentMode === 'timed'"
+                @createGame="(mode, args) => {typeTestStore.resetState(); typeTestStore.createTest(mode, args)}"
+                ></TsTimedMenu>
+                <TsWordsMenu v-if="currentMode === 'words'"
+                @createGame="(mode, args) => {typeTestStore.resetState(); typeTestStore.createTest(mode, args)}"></TsWordsMenu>
+                <TsQuoteMenu v-if="currentMode ==='quote'"
+                @createGame="(mode, args) => {typeTestStore.resetState(); typeTestStore.createTest(mode, args)}"></TsQuoteMenu>
             </div>
         </div>
         <div class="min-h-[2%] w-full" :class="currentTheme.colors.divider">
             <h2 class="text-[0.1rem]" :class="currentTheme.colors.text2">.</h2>
         </div>
-       
+       <TypeQuoteTest v-if="typeTestStore.showTest && currentMode === 'quote'"></TypeQuoteTest>
+       <TypeTimeTest v-if="typeTestStore.showTest && currentMode === 'timed'"></TypeTimeTest>
+       <TypeWordsTest v-if="typeTestStore.showTest && currentMode === 'words'"></TypeWordsTest>
     </div>
 </template>
 
@@ -36,6 +42,7 @@ useHead({
 })
 
 let themeStore = useThemeStore()
+let typeTestStore = useTypeTestStore()
 let currentTheme = computed(() => themeStore.getActiveTheme())
 
 const currentMode = ref<('words' | 'timed' | 'quote' | 'none')>('none')

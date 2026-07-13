@@ -69,13 +69,15 @@ let useNumbers = ref<boolean>(false)
 let usePunctuation = ref<boolean>(false)
 let capitalizeWords = ref<boolean>(false)
 
+useTypeTestStore().resetState()
+
 function createTest() {
     let words = Number(wordsInput.value)
     if (!(words > 0)) wordsError.value = true
     
     if((!wordsError.value)
     && (selectedLanguage.value)
-    ) {} // EMIT
+    ) emit('createGame', 'words', [wordsInput.value, selectedLanguage.value, useNumbers.value, usePunctuation.value, capitalizeWords.value])
     
 }
 

@@ -1,5 +1,6 @@
-export const typeTestScore = defineStore('typeTest', {
+export const useTypeTestStore = defineStore('typeTest', {
     state: () => ({
+        showTest: false as boolean,
         activeMode: '' as string,
         language: '' as string,
         wordCount: 0 as number,
@@ -7,10 +8,13 @@ export const typeTestScore = defineStore('typeTest', {
         useNumbers: false as boolean,
         usePunctuation: false as boolean,
         capitalizeWords: false as boolean,
+        allLowercase: false as boolean,
         showAuthor: false as boolean,
         author: '' as string,
         quoteContent: '' as string,
+        completedWordsContent: [] as string[],
         wordsContent: [] as string[],
+        approachingWordsContent: [] as string[],
         langCodes: {
             'English': 'en',
             'Spanish': 'es',
@@ -23,6 +27,7 @@ export const typeTestScore = defineStore('typeTest', {
     }),
     actions: {
         resetState() {
+            this.showTest = false
             this.activeMode = ''
             this.language = ''
             this.wordCount = 0
@@ -33,7 +38,9 @@ export const typeTestScore = defineStore('typeTest', {
             this.showAuthor = false
             this.author = ''
             this.quoteContent = ''
+            this.completedWordsContent = []
             this.wordsContent = []
+            this.approachingWordsContent = []
         },
         setTestTime(min: number, sec: number) {
             this.testTime = 0
@@ -59,5 +66,39 @@ export const typeTestScore = defineStore('typeTest', {
                     this.wordsContent = wordsJSON
                 })  
         },
+        async createTest(mode:string, args:(boolean | number | string)[]) {
+            if(mode==='quote') {
+                this.allLowercase = (args[0] as boolean)
+                this.usePunctuation = (args[1] as boolean)
+                this.showAuthor = (args[2] as boolean)
+
+                await this.populateQuote()
+                this.applyQuoteModes()
+            } else if (mode === 'timed') {
+                this.setTestTime(Number(args[0]), Number(args[1]))
+                this.language = args[2] as string
+
+                this.useNumbers = (args[3] as boolean)
+                this.usePunctuation = (args[4] as boolean)
+                this.capitalizeWords = (args[5] as boolean)
+
+                await this.getWords()
+            } else if (mode === 'words') {
+                this.wordCount = Number(args[0])
+                this.language = (args[1] as string)
+
+                this.useNumbers = (args[2] as boolean)
+                this.usePunctuation = (args[3] as boolean)
+                this.capitalizeWords = (args[4] as boolean)
+
+                await this.getWords()
+            }
+            this.showTest = true
+        },
+        
+        applyQuoteModes() {
+            if(this.allLowercase) this.quoteContent = this.quoteContent.toLowerCase()
+            if(!this.usePunctuation) this.quoteContent = this.quoteContent.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g, "")
+        }
     }
 })

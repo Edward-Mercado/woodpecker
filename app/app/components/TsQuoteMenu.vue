@@ -6,6 +6,7 @@
         </div>
         <div class="my-[2%] border rounded-full" :class="currentTheme.colors.basicDiv"></div>
         
+        <p :class="currentTheme.colors.text4" class="elms-sans text-md italic mr-[1%] my-[1%]">English is currently the only supported language for Quote Mode.</p>
         <div class="flex w-full justify-between mb-[1%] flex-wrap gap-y-2">
             <button class="border-2 px-[1%] rounded-2xl transition-all duration-300 hover:translate-y-[-5%] active:translate-y-[5%] elms-sans w-[30%]"
             :class="[currentTheme.colors.button1,
@@ -33,13 +34,15 @@ const emit = defineEmits(['createGame'])
 
 let themeStore = useThemeStore()
 let currentTheme = computed(() => themeStore.getActiveTheme())
+
+useTypeTestStore().resetState()
+
 let allLowercase = ref<boolean>(false)
 let usePunctuation = ref<boolean>(false)
 let showAuthor = ref<boolean>(false)
 
 function createTest() {
-    {} // EMIT
-    
+    emit('createGame', 'quote', [allLowercase.value, usePunctuation.value, showAuthor.value])
 }
 
 function useRecSettings() {
